@@ -68,17 +68,14 @@ class ValueCalculator:
             date: value for date, value in self.ipca_data.items() if date >= base_date
         }
         if not relevant_ipca:
-            print("A data base já é a mais recente. Nenhuma atualização monetária aplicada.")
             return current_value
 
-        print(f"Atualizando valor de R$ {current_value:.2f} a partir de {base_date_str}...")
         penny = Decimal('0.01')
 
         for date, index in sorted(relevant_ipca.items()):
             multiplier = Decimal('1') + (index / Decimal('100'))
             current_value *= multiplier
             current_value = current_value.quantize(penny, rounding=ROUND_HALF_UP)
-            print(f"  - Após {date.strftime('%m/%Y')} (IPCA: {index}%), valor: R$ {current_value:.2f}")
         return current_value
 
 
