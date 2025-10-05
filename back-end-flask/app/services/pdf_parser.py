@@ -1,9 +1,9 @@
 import re
 from pypdf import PdfReader
-from typing import Dict, Any, Optional
+from typing import Optional
 import pprint
 from pathlib import Path
-import sys
+from app.schemas.schemasPydantic import DadosRequisicaoSchema
 
 def _extract_full_text(pdf_path: str) -> str:
     """Abre um PDF e extrai o texto completo de todas as páginas."""
@@ -38,15 +38,10 @@ def _clean_cpf(cpf_str: Optional[str]) -> Optional[str]:
         return None
     return re.sub(r'[^\d]', '', cpf_str)
 
-def extract_data_from_pdf(pdf_path: str) -> Dict[str, Any]:
+
+def extract_data_from_pdf(pdf_path: str) -> DadosRequisicaoSchema:
     """
     Função principal que orquestra a extração de dados de um PDF de requisição.
-
-    Args:
-        pdf_path: O caminho para o arquivo PDF.
-
-    Returns:
-        Um dicionário com os dados extraídos e estruturados.
     """
     full_text = _extract_full_text(pdf_path)
     full_text = full_text.replace('\xa0', ' ')
@@ -58,14 +53,15 @@ def extract_data_from_pdf(pdf_path: str) -> Dict[str, Any]:
         "valor_bruto": r"Valor bruto da requisição:\s*R\$\s*([\d\.,]+)",
         "data_base_calculo": r"Data base do cálculo:\s*(\d{2}/\d{2}/\d{4})",
     }
-    extracted_data = {}
+
+    extracted_data_dict = {}
     for key, pattern in patterns.items():
-        extracted_data[key] = _search_pattern(full_text, pattern)
+        extracted_data_dict[key] = _search_pattern(full_text, pattern)
 
-    extracted_data["valor_bruto"] = _clean_monetary_value(extracted_data.get("valor_bruto"))
-    extracted_data["cpf_beneficiario"] = _clean_cpf(extracted_data.get("cpf_beneficiario"))
+    extracted_data_dict["valor_bruto"] = _clean_monetary_value(extracted_data_dict.get("valor_bruto"))
+    extracted_data_dict["cpf_beneficiario"] = _clean_cpf(extracted_data_dict.get("cpf_beneficiario"))
 
-    return extracted_data
+    return DadosRequisicaoSchema(**extracted_data_dict)
 
 
 if __name__ == '__main__':
