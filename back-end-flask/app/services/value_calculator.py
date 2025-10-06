@@ -2,14 +2,14 @@ import httpx
 import asyncio
 from datetime import datetime
 from decimal import Decimal, ROUND_HALF_UP
-
+import os
 
 class ValueCalculator:
     """
     Calcula o valor líquido atualizado de uma requisição de pagamento
     de forma assíncrona.
     """
-    IPCA_API_URL = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json"
+    IPCA_API_URL = os.getenv("IPCA_API_URL")
 
     def __init__(self, ipca_data: dict):
         if not ipca_data:

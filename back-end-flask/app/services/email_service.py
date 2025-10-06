@@ -28,6 +28,11 @@ def send_calculation_email(recipient_email: str, input_data: dict, calculation_r
     valor_liquido_final_fmt = f"R$ {calculation_results.get('valor_liquido_final_ir', 0):,.2f}".replace(",","X").replace(".", ",").replace("X", ".")
     valor_bruto_original_fmt = f"R$ {input_data.get('valor_bruto', 0):,.2f}".replace(",", "X").replace(".",",").replace("X",".")
 
+    cpf = input_data.get('cpf_beneficiario')
+    cpf_fmt = cpf
+    if cpf and isinstance(cpf, str) and len(cpf) == 11:
+        cpf_fmt = f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+
     # Cria o corpo do e-mail em HTML para uma formatação melhor
     html_body = f"""
         <html>
@@ -63,8 +68,28 @@ def send_calculation_email(recipient_email: str, input_data: dict, calculation_r
             <td style="text-align: right;">{valor_liquido_final_fmt}</td>
           </tr>
         </table>
-
-        <p>Atenciosamente,<br>Calculadora de Correção </p>
+        <br>
+         <h3>Dados Extraídos do Documento</h3>
+        <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+            <tr style="background-color:#f2f2f2;">
+                <th style="text-align: left;">Campo</th>
+                <th style="text-align: left;">Valor</th>
+            </tr>
+            <tr>
+                <td>Número do Ofício</td>
+                <td>{input_data.get('numero_oficio', 'N/A')}</td>
+            </tr>
+            <tr>
+                <td>Nome do Beneficiário</td>
+                <td>{input_data.get('nome_beneficiario', 'N/A')}</td>
+            </tr>
+            <tr>
+                <td>CPF do Beneficiário</td>
+                <td>{cpf_fmt}</td>
+            </tr>
+        </table>
+        <br>
+        <p>Atenciosamente,<br>Calculadora de Requisiórios</p>
       </body>
     </html>
         """

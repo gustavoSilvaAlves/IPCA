@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
 import pandas as pd
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # --- Configuração da Página ---
 st.set_page_config(
@@ -10,7 +13,7 @@ st.set_page_config(
 )
 
 # --- Configuração da API ---
-API_URL = "http://127.0.0.1:5001/api/calculate"
+API_URL = os.getenv("API_URL")
 
 # --- Interface do Usuário (UI) ---
 st.title("⚖️ Calculadora de Correção ")
