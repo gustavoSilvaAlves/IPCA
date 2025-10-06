@@ -49,7 +49,7 @@ class ValueCalculator:
         Orquestra o cálculo e retorna um dicionário com o valor bruto
         atualizado e o valor líquido.
         """
-        updated_gross_value = self._calculate_updated_gross_value(gross_value, base_date_str)
+        updated_gross_value, last_update_date = self._calculate_updated_gross_value(gross_value, base_date_str)
 
         net_value = updated_gross_value * Decimal('0.97')
 
@@ -57,7 +57,8 @@ class ValueCalculator:
 
         return {
             "valor_bruto_corrigido": float(updated_gross_value.quantize(penny, rounding=ROUND_HALF_UP)),
-            "valor_liquido_final_ir": float(net_value.quantize(penny, rounding=ROUND_HALF_UP))
+            "valor_liquido_final_ir": float(net_value.quantize(penny, rounding=ROUND_HALF_UP)),
+            "ultimo_mes_corrigido": last_update_date.strftime('%m/%Y') if last_update_date else base_date_str[3:]
         }
 
     def _calculate_updated_gross_value(self, gross_value: float, base_date_str: str) -> Decimal:
@@ -72,11 +73,14 @@ class ValueCalculator:
 
         penny = Decimal('0.01')
 
+        last_update_date = None
+
         for date, index in sorted(relevant_ipca.items()):
             multiplier = Decimal('1') + (index / Decimal('100'))
             current_value *= multiplier
             current_value = current_value.quantize(penny, rounding=ROUND_HALF_UP)
-        return current_value
+            last_update_date = date
+        return current_value, last_update_date
 
 
 async def main_test():
