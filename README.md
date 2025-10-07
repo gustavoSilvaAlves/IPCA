@@ -1,5 +1,8 @@
 # ⚖️ Calculadora de Correção
-![Python](https://img.shields.io/badge/Python-3.11-blue.svg) ![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green.svg) ![LangChain](https://img.shields.io/badge/LangChain-blue?logo=langchain) ![LangGraph](https://img.shields.io/badge/LangGraph-orange?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00IDdoMnYxMEg0em0zIDBoMnYxMEg3em0zIDBoMnYxMEgxMHptMyAwaDJ2MTBIMTN6bTggMi42OThsLTIuNzk4IDIuNzk3bC0xLjQxNC0xLjQxNEwxOC4xNzIgMTBMMTYuNTggOC40MTNsMS40MTQtMS40MTRaTTIgN2gxNHYxMEgyek0xIDV2MTRoMTZWNWEyIDIgMCAwIDAtMi0ySDNBMiAyIDAgMCAwIDEgNSIvPjwvc3ZnPg==) ![Keycloak](https://img.shields.io/badge/Keycloak-2F81B7.svg?logo=keycloak) ![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker) ![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-e92063?logo=pydantic&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 
 Este projeto é uma aplicação web completa projetada para automatizar o processo de cálculo de atualização de valores de requisitórios judiciais. A aplicação extrai dados de documentos PDF, aplica a correção monetária com base no índice IPCA, aplica o desconto dos 3% do imposto de renda e envia um relatório detalhado por e-mail.
 
@@ -158,4 +161,5 @@ O projeto inclui scripts para testes isolados e de performance.
     python -m tests.load_test
 
     ```
+
 
