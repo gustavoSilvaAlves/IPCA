@@ -6,6 +6,8 @@
 
 Este projeto é uma aplicação web completa projetada para automatizar o processo de cálculo de atualização de valores de requisitórios judiciais. A aplicação extrai dados de documentos PDF, aplica a correção monetária com base no índice IPCA, aplica o desconto dos 3% do imposto de renda e envia um relatório detalhado por e-mail.
 
+<img width="1866" height="920" alt="Captura de tela 2025-10-06 225513" src="https://github.com/user-attachments/assets/fe83ebf4-543e-4e71-890c-303d6d459d22" />
+
 ## 🎯 Objetivo do Projeto
 
 O objetivo principal é fornecer uma ferramenta robusta e de fácil utilização para:
@@ -14,6 +16,8 @@ O objetivo principal é fornecer uma ferramenta robusta e de fácil utilização
 3.  Calcular o valor bruto corrigido, aplicando o índice IPCA mensalmente a partir da data base.
 4.  Calcular o valor líquido final, com o desconto de 3% de Imposto de Renda.
 5.  Enviar um e-mail formatado com o resumo completo do cálculo para um destinatário especificado.
+
+<img width="1872" height="922" alt="Captura de tela 2025-10-06 225531" src="https://github.com/user-attachments/assets/ebd099b7-8e9f-4459-8630-76559dfe095d" />
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -161,5 +165,6 @@ O projeto inclui scripts para testes isolados e de performance.
     python -m tests.load_test
 
     ```
+
 
 
