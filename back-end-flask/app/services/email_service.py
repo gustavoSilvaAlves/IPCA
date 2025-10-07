@@ -89,7 +89,7 @@ def send_calculation_email(recipient_email: str, input_data: dict, calculation_r
             </tr>
         </table>
         <br>
-        <p>Atenciosamente,<br>Calculadora de Requisiórios</p>
+        <p>Atenciosamente,<br>Calculadora de Correção </p>
       </body>
     </html>
         """
