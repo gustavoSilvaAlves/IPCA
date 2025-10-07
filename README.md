@@ -97,18 +97,19 @@ Ambos os serviços precisam de um arquivo `.env` para suas configurações.
     * Na pasta `back-end-flask`, renomeie `env.example` para `.env`.
     * Preencha todas as variáveis, especialmente `SECRET_KEY` e as credenciais de e-mail (`MAIL_*`).
 
-    <details>
-    <summary><strong>Clique aqui para ver o passo a passo de como gerar a Senha de App (MAIL_PASSWORD) para o Gmail</strong></summary>
-
-    1.  **Pré-requisito:** Certifique-se de que a **Verificação em Duas Etapas** esteja ativada na sua Conta Google. Você pode ativá-la na aba "Segurança" da sua conta.
-    2.  Acesse a página de **[Senhas de app](https://myaccount.google.com/apppasswords)** da sua Conta Google. (Pode ser necessário fazer login novamente).
-    3.  Na tela "Senhas de app", em "Selecionar app", escolha a opção **"Outro (*nome personalizado*)**".
-    4.  Digite um nome para a sua senha, como `API Flask Calculadora`, e clique em **GERAR**.
-    5.  O Google irá exibir uma caixa amarela com a sua senha de **16 letras**, sem espaços (ex: `ilqrginkqekwmoyf`).
-    6.  **Copie esta senha de 16 letras**. É ela que você deve colar no seu arquivo `.env` na variável `MAIL_PASSWORD`.
-    7.  **Atenção:** Guarde esta senha, pois o Google só a exibe uma vez. Após fechar a janela, você não poderá vê-la novamente e terá que gerar uma nova.
-
-    </details>
+    > **⚠️ Importante:** A `MAIL_PASSWORD` não é a sua senha normal do Gmail. Siga o tutorial abaixo.
+    > <details>
+    > <summary><strong>👉 Clique aqui para ver o passo a passo de como gerar a Senha de App obrigatória.</strong></summary>
+    >
+    > 1.  **Pré-requisito:** Certifique-se de que a **Verificação em Duas Etapas** esteja ativada na sua Conta Google. Você pode ativá-la na aba "Segurança" da sua conta.
+    > 2.  Acesse a página de **[Senhas de app](https://myaccount.google.com/apppasswords)** da sua Conta Google. (Pode ser necessário fazer login novamente).
+    > 3.  Na tela "Senhas de app", em "Selecionar app", escolha a opção **"Outro (*nome personalizado*)**".
+    > 4.  Digite um nome para a sua senha, como `API Flask Calculadora`, e clique em **GERAR**.
+    > 5.  O Google irá exibir uma caixa amarela com a sua senha de **16 letras**, sem espaços (ex: `ilqrginkqekwmoyf`).
+    > 6.  **Copie esta senha de 16 letras**. É ela que você deve colar no seu arquivo `.env` na variável `MAIL_PASSWORD`.
+    > 7.  **Atenção:** Guarde esta senha, pois o Google só a exibe uma vez. Após fechar a janela, você não poderá vê-la novamente e terá que gerar uma nova.
+    >
+    > </details>
 
 2.  **Frontend:**
     * Na pasta `front-end-streamlit`, renomeie `env.example` para `.env`.
@@ -165,6 +166,7 @@ O projeto inclui scripts para testes isolados e de performance.
     python -m tests.load_test
 
     ```
+
 
 
 
