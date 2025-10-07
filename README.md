@@ -1,6 +1,17 @@
 # ⚖️ Calculadora de Correção
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-e92063?logo=pydantic&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker%20Compose-2496ED?logo=docker&logoColor=white)
+
 
 Este projeto é uma aplicação web completa projetada para automatizar o processo de cálculo de atualização de valores de requisitórios judiciais. A aplicação extrai dados de documentos PDF, aplica a correção monetária com base no índice IPCA, aplica o desconto dos 3% do imposto de renda e envia um relatório detalhado por e-mail.
+
+O andamento das atividades e o backlog do projeto podem ser acompanhados através do nosso board no **[Trello](https://trello.com/b/K4ktfO2e/vaga-desenvolvedor-precnet)**.
+
+<img width="1866" height="920" alt="Captura de tela 2025-10-06 225513" src="https://github.com/user-attachments/assets/fe83ebf4-543e-4e71-890c-303d6d459d22" />
 
 ## 🎯 Objetivo do Projeto
 
@@ -10,6 +21,8 @@ O objetivo principal é fornecer uma ferramenta robusta e de fácil utilização
 3.  Calcular o valor bruto corrigido, aplicando o índice IPCA mensalmente a partir da data base.
 4.  Calcular o valor líquido final, com o desconto de 3% de Imposto de Renda.
 5.  Enviar um e-mail formatado com o resumo completo do cálculo para um destinatário especificado.
+
+<img width="1872" height="922" alt="Captura de tela 2025-10-06 225531" src="https://github.com/user-attachments/assets/ebd099b7-8e9f-4459-8630-76559dfe095d" />
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -89,18 +102,19 @@ Ambos os serviços precisam de um arquivo `.env` para suas configurações.
     * Na pasta `back-end-flask`, renomeie `env.example` para `.env`.
     * Preencha todas as variáveis, especialmente `SECRET_KEY` e as credenciais de e-mail (`MAIL_*`).
 
-    <details>
-    <summary><strong>Clique aqui para ver o passo a passo de como gerar a Senha de App (MAIL_PASSWORD) para o Gmail</strong></summary>
-
-    1.  **Pré-requisito:** Certifique-se de que a **Verificação em Duas Etapas** esteja ativada na sua Conta Google. Você pode ativá-la na aba "Segurança" da sua conta.
-    2.  Acesse a página de **[Senhas de app](https://myaccount.google.com/apppasswords)** da sua Conta Google. (Pode ser necessário fazer login novamente).
-    3.  Na tela "Senhas de app", em "Selecionar app", escolha a opção **"Outro (*nome personalizado*)**".
-    4.  Digite um nome para a sua senha, como `API Flask Calculadora`, e clique em **GERAR**.
-    5.  O Google irá exibir uma caixa amarela com a sua senha de **16 letras**, sem espaços (ex: `ilqrginkqekwmoyf`).
-    6.  **Copie esta senha de 16 letras**. É ela que você deve colar no seu arquivo `.env` na variável `MAIL_PASSWORD`.
-    7.  **Atenção:** Guarde esta senha, pois o Google só a exibe uma vez. Após fechar a janela, você não poderá vê-la novamente e terá que gerar uma nova.
-
-    </details>
+    > **⚠️ Importante:** A `MAIL_PASSWORD` não é a sua senha normal do Gmail. Siga o tutorial abaixo.
+    > <details>
+    > <summary><strong>👉 Clique aqui para ver o passo a passo de como gerar a Senha de App obrigatória.</strong></summary>
+    >
+    > 1.  **Pré-requisito:** Certifique-se de que a **Verificação em Duas Etapas** esteja ativada na sua Conta Google. Você pode ativá-la na aba "Segurança" da sua conta.
+    > 2.  Acesse a página de **[Senhas de app](https://myaccount.google.com/apppasswords)** da sua Conta Google. (Pode ser necessário fazer login novamente).
+    > 3.  Na tela "Senhas de app", em "Selecionar app", escolha a opção **"Outro (*nome personalizado*)**".
+    > 4.  Digite um nome para a sua senha, como `API Flask Calculadora`, e clique em **GERAR**.
+    > 5.  O Google irá exibir uma caixa amarela com a sua senha de **16 letras**, sem espaços (ex: `ilqrginkqekwmoyf`).
+    > 6.  **Copie esta senha de 16 letras**. É ela que você deve colar no seu arquivo `.env` na variável `MAIL_PASSWORD`.
+    > 7.  **Atenção:** Guarde esta senha, pois o Google só a exibe uma vez. Após fechar a janela, você não poderá vê-la novamente e terá que gerar uma nova.
+    >
+    > </details>
 
 2.  **Frontend:**
     * Na pasta `front-end-streamlit`, renomeie `env.example` para `.env`.
@@ -108,7 +122,11 @@ Ambos os serviços precisam de um arquivo `.env` para suas configurações.
 
 ## ▶️ Executando a Aplicação
 
-Você precisará de **dois terminais** abertos para executar a aplicação completa.
+Existem duas maneiras de executar o projeto completo.
+
+### Método 1: Execução Local (para Desenvolvimento)
+
+Ideal para desenvolver e depurar cada serviço separadamente. Você precisará de **dois terminais**.
 
 **Terminal 1: Iniciar o Backend**
 ```bash
@@ -118,7 +136,7 @@ cd back-end-flask
 # Ative o ambiente virtual
 .\venv\Scripts\Activate.ps1
 
-# Inicie o servidor de produção Waitress
+# Inicie o servidor Waitress
 waitress-serve --host=127.0.0.1 --port=5001 main:app
 ```
 
@@ -133,7 +151,22 @@ cd front-end-streamlit
 # Inicie a aplicação Streamlit
 streamlit run app.py
 ```
-Após executar o último comando, o Streamlit abrirá uma aba no seu navegador com a interface da aplicação, pronta para ser usada.
+Acesse a interface em [http://localhost:8501](http://localhost:8501).
+
+### Método 2: Execução com Docker Compose (Recomendado)
+
+A forma mais simples de rodar a aplicação completa, pois gerencia todos os serviços automaticamente com um único comando.
+
+1.  **Pré-requisito:** Certifique-se de que o **Docker Desktop** esteja em execução.
+2.  **Ajuste a URL da API para Docker:** Verifique se o arquivo `front-end-streamlit/.env.docker` existe e contém a linha:
+    `API_URL="http://backend:5001/api/calculate"`
+3.  **Inicie os contêineres:** Abra um terminal na **pasta raiz** do projeto (`precnet`) e execute:
+    ```bash
+    docker-compose up --build
+    ```
+4.  Acesse a interface em [http://localhost:8501](http://localhost:8501).
+5.  Para parar tudo, pressione `Ctrl+C` no terminal.
+
 
 ## ✅ Testando a Solução
 
@@ -155,4 +188,10 @@ O projeto inclui scripts para testes isolados e de performance.
     Para simular múltiplos acessos concorrentes à API, execute (na pasta `back-end-flask`):
     ```bash
     python -m tests.load_test
+
     ```
+
+
+
+
+
