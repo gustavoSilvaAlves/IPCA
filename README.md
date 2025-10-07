@@ -3,8 +3,13 @@
 ![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
 ![Pydantic](https://img.shields.io/badge/Pydantic-e92063?logo=pydantic&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker%20Compose-2496ED?logo=docker&logoColor=white)
+
 
 Este projeto é uma aplicação web completa projetada para automatizar o processo de cálculo de atualização de valores de requisitórios judiciais. A aplicação extrai dados de documentos PDF, aplica a correção monetária com base no índice IPCA, aplica o desconto dos 3% do imposto de renda e envia um relatório detalhado por e-mail.
+
+O andamento das atividades e o backlog do projeto podem ser acompanhados através do nosso board no **[Trello](https://trello.com/b/K4ktfO2e/vaga-desenvolvedor-precnet)**.
 
 <img width="1866" height="920" alt="Captura de tela 2025-10-06 225513" src="https://github.com/user-attachments/assets/fe83ebf4-543e-4e71-890c-303d6d459d22" />
 
@@ -117,7 +122,11 @@ Ambos os serviços precisam de um arquivo `.env` para suas configurações.
 
 ## ▶️ Executando a Aplicação
 
-Você precisará de **dois terminais** abertos para executar a aplicação completa.
+Existem duas maneiras de executar o projeto completo.
+
+### Método 1: Execução Local (para Desenvolvimento)
+
+Ideal para desenvolver e depurar cada serviço separadamente. Você precisará de **dois terminais**.
 
 **Terminal 1: Iniciar o Backend**
 ```bash
@@ -127,7 +136,7 @@ cd back-end-flask
 # Ative o ambiente virtual
 .\venv\Scripts\Activate.ps1
 
-# Inicie o servidor de produção Waitress
+# Inicie o servidor Waitress
 waitress-serve --host=127.0.0.1 --port=5001 main:app
 ```
 
@@ -142,7 +151,22 @@ cd front-end-streamlit
 # Inicie a aplicação Streamlit
 streamlit run app.py
 ```
-Após executar o último comando, o Streamlit abrirá uma aba no seu navegador com a interface da aplicação, pronta para ser usada.
+Acesse a interface em [http://localhost:8501](http://localhost:8501).
+
+### Método 2: Execução com Docker Compose (Recomendado)
+
+A forma mais simples de rodar a aplicação completa, pois gerencia todos os serviços automaticamente com um único comando.
+
+1.  **Pré-requisito:** Certifique-se de que o **Docker Desktop** esteja em execução.
+2.  **Ajuste a URL da API para Docker:** Verifique se o arquivo `front-end-streamlit/.env.docker` existe e contém a linha:
+    `API_URL="http://backend:5001/api/calculate"`
+3.  **Inicie os contêineres:** Abra um terminal na **pasta raiz** do projeto (`precnet`) e execute:
+    ```bash
+    docker-compose up --build
+    ```
+4.  Acesse a interface em [http://localhost:8501](http://localhost:8501).
+5.  Para parar tudo, pressione `Ctrl+C` no terminal.
+
 
 ## ✅ Testando a Solução
 
@@ -166,6 +190,7 @@ O projeto inclui scripts para testes isolados e de performance.
     python -m tests.load_test
 
     ```
+
 
 
 
