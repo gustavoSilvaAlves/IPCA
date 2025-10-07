@@ -1,0 +1,27 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Define o serviço do backend
+  backend:
+    build:
+      context: ./back-end-flask
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./back-end-flask/.env
+
+  # Define o serviço do frontend
+  frontend:
+    build:
+      context: ./front-end-streamlit
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    env_file:
+      - ./front-end-streamlit/.env.docker
+    # Faz o frontend esperar o backend iniciar
+    depends_on:
+      - backend

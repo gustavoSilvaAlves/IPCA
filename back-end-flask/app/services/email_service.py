@@ -98,7 +98,7 @@ def send_calculation_email(recipient_email: str, input_data: dict, calculation_r
 
     # Envia o e-mail
     try:
-        context = ssl.create_default_context()
+        context = ssl._create_unverified_context()
 
         logging.info(f"Conectando ao servidor SMTP para enviar e-mail para {recipient_email}...")
 
